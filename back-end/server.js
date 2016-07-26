@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var virusTotal = require('./controllers/vt');
 
 app.use(bodyParser.json());
 
@@ -10,13 +11,14 @@ app.use(function(req,res,next){
     next();
 })
 
-app.get('/api/message', );
 
 //what to reply when rcv post
 app.post('/api/message', function(req,res){
     console.log(req.body);
     res.status(200);
 })
+
+app.get('/api/search', virusTotal.data)
 
 
 

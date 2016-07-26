@@ -1,16 +1,21 @@
 <div class="container">
-    <div class="col-md-6">
-        <div class="Panel panel-default">
-            <div class="panel-heading"> Search IP</div>
-            <div class="panel-body">
+
+    <div class="Panel panel-default">
+        <div class="panel-heading"> Post A Message</div>
+        <div class="panel-body">
+            <div class="input-group">
+            <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
+            <span class="input-group-addon btn btn-primary" ng-click="search.getMessage()">Post</span>
             </div>
-        </div>
     </div>
-    <div class="col-md-6">
-        <div class="Panel panel-default">
-            <div class="panel-heading"> Search Hash</div>
+    <div class="Panel panel-default">
+            <div class="panel-heading"> Reply: {{messages.md5}}</div>
             <div class="panel-body">
-            </div>
+                <div class="list-group" ng-app="search" ng-controller="SearchController">
+                    <ul class="list-group">
+                            <li class="list-group-item" data-ng-repeat="message in messages"> {{messages.md}}</li>
+                    </ul>
+                <span class="input-group-addon btn btn-primary" ng-click="search.getMessage()">Post</span>
+                </div>
         </div>
-    </div>
 </div>
