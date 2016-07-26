@@ -4,6 +4,12 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
+app.use(function(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+})
+
 //what to do when rcv post
 app.post('/api/message', function(req,res){
     console.log(req.body);
