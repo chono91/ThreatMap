@@ -29,6 +29,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	
+	<script src="js/client/global.js"></script>
 </head>
 
 <body>
@@ -44,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">ThreatMap</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -67,27 +69,36 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.6</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
-            </div>
-        </div>
+			<div class="col-xs-8">
+				<div class="col-xs-12 text-center">
+					<h1>A Bootstrap Starter Template</h1>
+					<p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
+					<ul class="list-unstyled">
+						<li>Bootstrap v3.3.6</li>
+						<li>jQuery v1.11.1</li>
+					</ul>
+				</div>
+			</div>
+
+				<div class="col-xs-4 bg-info">
+					<form>
+						<label for="InputQuery">Search: </label>
+						<input type="text" class="form-control" id="InputQuery" placeholder="Query">	
+					<input class="btn btn-primary btn-lg pull-right" type="submit" value="submit" id = "Submit"> </input>
+					</form>
+				</div>
+		</div>
         <!-- /.row -->
 
     </div>
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
+    <script src="js/client/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/client/bootstrap.min.js"></script>
 
 </body>
 
