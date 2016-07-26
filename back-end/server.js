@@ -10,11 +10,15 @@ app.use(function(req,res,next){
     next();
 })
 
-//what to do when rcv post
+app.get('/api/message', );
+
+//what to reply when rcv post
 app.post('/api/message', function(req,res){
     console.log(req.body);
     res.status(200);
 })
+
+
 
 var server = app.listen(5000, function(){
     console.log('listening on port ', server.address().port);

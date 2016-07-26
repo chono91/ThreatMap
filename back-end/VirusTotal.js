@@ -13,7 +13,7 @@ var methon = "GET";
 function performRequest(endpoint, method, data, success) {
 	var dataString = JSON.stringify(data);
 	var headers = {};
-	
+
 	if (method == 'GET') {
 		endpoint += '?' + querystring.stringify(data);
 	}
@@ -30,23 +30,23 @@ function performRequest(endpoint, method, data, success) {
 		method: method,
 		headers: headers
 	};
-	
+
 	var req = https.request(options, function(res) {
 		res.setEncoding('UTF-8');
 		var responseString = '';
 		console.log("Repsonse from server started");
 		console.log(`Server status: ${res.statusCode} `);
 		console.log("Response Headesrs: %j", res.headers);
-		
+
 		//res.once("data", function(data) {
 		//	console.log(data);
 		//});
-		
+
 		res.on('data', function(data) {
 			console.log(`--chunk-- ${data.length}`);
 			responseString += data;
 		});
-		
+
 		res.on('end', function() {
 			//console.log(responseString);
 			var responseObject = JSON.parse(responseString);
@@ -58,7 +58,7 @@ function performRequest(endpoint, method, data, success) {
 			console.log("DONE");
 		});
 	});
-	
+
 	req.on("error", function(err){
 		console.log(`problem with request: ${err.message}`);
 	});

@@ -6,6 +6,12 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/main/main.html',
       controller: 'MainController',
       controllerAs: 'main'
+    })
+    .state('search', {
+      url: '/search',
+      templateUrl: 'app/search/search.html',
+      controller: 'SearchController',
+      controllerAs: 'search'
     });
 
   $urlRouterProvider.otherwise('/');
