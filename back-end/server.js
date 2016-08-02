@@ -2,8 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var searchHandler = require('./controllers/searchHandler');
+var virusTotal = require('./controllers/vt');
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded());//get post from url
 
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -13,11 +14,14 @@ app.use(function(req,res,next){
 
 
 //what to reply when rcv post
-var req = "";
 app.post('/api/search', function(req,res){
-        var info = searchHandler.search(req.body.md5);
+        threatFeeds = searchHandler.searchers(); //get list of threatfeeds
+        console.log(threatFeeds);
+        var info = virusTotal.data(req.body.md5);
         info.then( (data) => {
-            res.send(data);
+            threatFeeds.setData(data);
+            res.send("Resource: " + threatFeeds.source + " Data: " + JSON.stringify(threatFeeds.rawData));
+
         });
 
 })
