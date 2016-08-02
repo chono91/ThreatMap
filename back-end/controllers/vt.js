@@ -2,6 +2,7 @@
 
 module.exports = {
     data: function(req) {
+
         var querystring = require('querystring');
         var https = require("https");
         var fs = require("fs");
@@ -9,7 +10,7 @@ module.exports = {
         var host = "www.virustotal.com";
         var endpoint = "/vtapi/v2/file/report";
         var port = 443;
-        var resource =  "99017f6eebbac24f351415dd410d522d";
+        var resource = req;
         var apikey = "065d00685e274ea2261493fb28afb039adacb5211a54fea8098d09d726b8a4a3";
         var method = "GET";
 

@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var virusTotal = require('./controllers/vt');
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -13,8 +13,9 @@ app.use(function(req,res,next){
 
 
 //what to reply when rcv post
+var req = "";
 app.post('/api/search', function(req,res){
-        var info = virusTotal.hashQuery();
+        var info = virusTotal.data(req.body.md5);
         info.then( (data) => {
             res.send(data);
         });
