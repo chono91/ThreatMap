@@ -13,13 +13,15 @@ app.use(function(req,res,next){
 
 
 //what to reply when rcv post
-app.post('/api/message', function(req,res){
-    console.log(req.body);
-    res.status(200);
+app.post('/api/search', function(req,res){
+        var info = virusTotal.hashQuery();
+        info.then( (data) => {
+            res.send(data);
+        });
+
 })
 
 app.get('/api/search', virusTotal.data)
-
 
 
 var server = app.listen(5000, function(){

@@ -1,18 +1,19 @@
 
 
 module.exports = {
-    data: function(req,res){
+    data: function(req) {
         var querystring = require('querystring');
         var https = require("https");
         var fs = require("fs");
+        var q = require("deferred");
         var host = "www.virustotal.com";
         var endpoint = "/vtapi/v2/file/report";
-        //var host = "en.wikipedia.org"
-        //var endpoint = "/wiki/George_Washington"
-        var port = 443
+        var port = 443;
         var resource =  "99017f6eebbac24f351415dd410d522d";
         var apikey = "065d00685e274ea2261493fb28afb039adacb5211a54fea8098d09d726b8a4a3";
-        var methon = "GET";
+        var method = "GET";
+
+        var promise = q();
 
         function performRequest(endpoint, method, data, success) {
             var dataString = JSON.stringify(data);
@@ -39,36 +40,25 @@ module.exports = {
                 res2.setEncoding('UTF-8');
                 var responseString = '';
                 console.log("Repsonse from server started");
-                console.log(`Server status: ${res2.statusCode} `);
-                console.log("Response Headesrs: %j", res2.headers);
-
-                //res2.once("data", function(data) {
-                //	console.log(data);
-                //});
 
                 res2.on('data', function(data) {
-                    console.log(`--chunk-- ${data.length}`);
+                    //console.log(`--chunk-- ${data}`);
+                    console.log("Recievned Data Chunk");
                     responseString += data;
                 });
 
                 res2.on('end', function() {
-                    //console.log(responseString);
+                    console.log("End of data stream");
                     var responseObject = JSON.parse(responseString);
-                    //if (err) {
-                        //throw err;
-                    //}
-                    console.log(JSON.stringify(responseString));
+                    promise.resolve(responseObject);
                     success(responseObject);
-                    console.log("DONE");
-                    res.status(200);
-                    res.send(responseObject);
-                });
+                    return responseObject;
+                });;
             });
 
             request.on("error", function(err){
                 console.log(`problem with request: ${err.message}`);
             });
-            //request.write(dataString);
             request.end();
         }
 
@@ -79,5 +69,6 @@ module.exports = {
                 console.log('Fetched');
             });
 
+         return promise.promise;
     }
 }

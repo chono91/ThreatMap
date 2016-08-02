@@ -5,17 +5,15 @@
         <div class="panel-body">
             <div class="input-group">
             <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
-            <span class="input-group-addon btn btn-primary" ng-click="search.getMessage()">Post</span>
+            <span class="input-group-addon btn btn-primary" ng-click="search.postMessage()">Post</span>
             </div>
     </div>
-    <div class="Panel panel-default">
-            <div class="panel-heading"> Reply: {{messages.md5}}</div>
-            <div class="panel-body">
-                <div class="list-group" ng-app="search" ng-controller="SearchController">
-                    <ul class="list-group">
-                            <li class="list-group-item" data-ng-repeat="message in messages"> {{messages.md}}</li>
-                    </ul>
-                <span class="input-group-addon btn btn-primary" ng-click="search.getMessage()">Post</span>
-                </div>
-        </div>
+    <div class="Panel panel-default" id="target">
+            <div class="panel-heading" id="template">
+                <script id="template" type="text/x-tmpl-mustache">
+                {{messages}}
+                </script>
+            </div> <!--this is a template! look that shit up-->
+
 </div>
+
