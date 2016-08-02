@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var virusTotal = require('./controllers/vt');
+var searchHandler = require('./controllers/searchHandler');
 
 app.use(bodyParser.urlencoded());
 
@@ -15,14 +15,14 @@ app.use(function(req,res,next){
 //what to reply when rcv post
 var req = "";
 app.post('/api/search', function(req,res){
-        var info = virusTotal.data(req.body.md5);
+        var info = searchHandler.search(req.body.md5);
         info.then( (data) => {
             res.send(data);
         });
 
 })
 
-app.get('/api/search', virusTotal.data)
+//app.get('/api/search', searchHandler.search())
 
 
 var server = app.listen(5000, function(){
