@@ -1,25 +1,19 @@
 <div class="container">
-
     <div class="Panel panel-default">
         <div class="panel-heading"> Post A Message</div>
         <div class="panel-body">
             <div class="input-group">
-            <!--<textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message" name="md5"></textarea>
+                <!--<textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message" name="md5"></textarea>
             <span class="input-group-addon btn btn-primary" ng-click="search.postMessage()" type="Submit">Post</span>-->
-
-            <form id="myform" action="http://localhost:5000/api/search" method="post" enctype="application/x-www-form-urlencoded">
-            <input type="text" id="mytext" name="md5" />
-            <input type="submit" id="mysubmit" />
-            </form>
+                <form id="myform" action="http://localhost:5000/api/search" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="text" id="mytext" name="md5" />
+                    <input type="submit" id="mysubmit" /> </form>
                 </form>
             </div>
-    </div>
-    <div class="Panel panel-default" id="target">
+        </div>
+        <div class="Panel panel-default" id="target">
             <div class="panel-heading" id="template">
-                <script id="template" type="text/x-tmpl-mustache">
-                {{messages}}
-                </script>
-            </div> <!--this is a template! look that shit up-->
-
-</div>
-
+                <script id="template" type="text/x-tmpl-mustache"> {{messages}} </script>
+            </div>
+            <!--this is a template! look that shit up-->
+        </div>

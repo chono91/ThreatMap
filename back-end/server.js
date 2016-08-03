@@ -1,7 +1,7 @@
 //This is the main server file that handles communication with the client
 
 var express = require('express');
-var app = express();
+var app = express();7
 var bodyParser = require('body-parser');
 var q = require('deferred');
 var searchHandler = require('./controllers/searchHandler');
