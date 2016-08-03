@@ -67,7 +67,7 @@ module.exports = {
             resource: resource,
             apikey: apikey}
             , function(data) {
-                console.log('Fetched');
+                //console.log('Fetched');
             });
 
          return promise.promise;

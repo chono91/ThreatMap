@@ -1,4 +1,6 @@
-var virusTotal = require('./vt');
+//This file is to make a list of datapacks that represent each datafeed being sourced from
+
+
 var dataPack = require('../classes/dataPack.js');
 var q = require("deferred");
 var promise = q();
@@ -7,7 +9,11 @@ var promise = q();
 //Virus total plugin
 module.exports = {
     searchers: function(){
-        var VTData = new dataPack("Virus Total"); //sets up a new datapack for virus total with source name
+        var VTData = [new dataPack("Virus Total")]; //sets up a new datapack for virus total with source name
+        VTData[0].setPlugin("./feeds/vt.js");
+
+        VTData.push(new dataPack("Virus Total")); //sets up a new datapack for virus total with source name
+        VTData[1].setPlugin("./feeds/vt.js");
         return VTData;
     }
 }
