@@ -1,8 +1,9 @@
 //This is the main server file that handles communication with the client
 
 var express = require('express');
-var app = express();7
+var app = express();
 var bodyParser = require('body-parser');
+var loader = require('./classes/dataInterface');
 var q = require('deferred');
 var searchHandler = require('./controllers/searchHandler');
 
@@ -20,29 +21,28 @@ app.use(function(req,res,next){
 //what to reply when rcv post
 app.post('/api/search', function(req,res){
     var response = [{"test": "TEST"}];
-    var source;
     threatFeeds = searchHandler.searchers(); //get list of threatfeeds
     console.log(threatFeeds);   //list these threat feeds
-    function bullshit(i){
-        var threatFeed = require(threatFeeds[i].plugin); //get the require from the plugin field
-        var info = threatFeed.data(req.body.md5);   //pass md5 to plug in
-            info.then( (data) => { // wait for data to come in
-                console.log(i);
-                threatFeeds[i].setData(JSON.stringify(data)); // set the raw data field in the class to the reply
-                console.log("data set");
-                source = {"Resource" : threatFeeds[i].source};
-                //console.log({Resource: threatFeeds[i].source });
-                response.push(source);//send the data, need to add graphing thing later
-                console.log("HERE!!!!!!!!!!");
-            });
-        return(info);
-    }
+    //function bullshit(i){
+    //    var threatFeed = require(threatFeeds[i].plugin); //get the require from the plugin field
+    //    var info = threatFeed.data(req.body.md5);   //pass md5 to plug in
+    //        info.then( (data) => { // wait for data to come in
+    //            console.log(i);
+    //            threatFeeds[i].setData(JSON.stringify(data)); // set the raw data field in the class to the reply
+    //            console.log("data set");
+    //            source = {"Resource" : threatFeeds[i].source};
+    //            //console.log({Resource: threatFeeds[i].source });
+    //            response.push(source);//send the data, need to add graphing thing later
+    //            console.log("HERE!!!!!!!!!!");
+    //        });
+    //    return(info);
+
 
     //promises
     var plist = [];
 
     for (var i = 0; i<threatFeeds.length; i++){
-        plist.push(bullshit(i));
+        plist.push(loader.loader(i, req));
         }
 
     console.log(plist);

@@ -1,5 +1,7 @@
-    function loader(i){
-        var threatFeed = require(threatFeeds[i].plugin); //get the require from the plugin field
+
+module.exports = {
+    loader: function (i, req){
+        var threatFeed = require("." + threatFeeds[i].plugin); //get the require from the plugin field
         var info = threatFeed.data(req.body.md5);   //pass md5 to plug in
             info.then( (data) => { // wait for data to come in
                 console.log(i);
@@ -12,3 +14,4 @@
             });
         return(info);
     }
+}
