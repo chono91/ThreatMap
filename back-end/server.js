@@ -3,15 +3,15 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var loader = require('./classes/dataInterface');
-var q = require('deferred');
+var dataInterface = require('./classes/dataInterface');
+var q = require('deferred'); //has something to do with promieses, not sure
 var searchHandler = require('./controllers/searchHandler');
 
-var promise = q();
+var promise = q();//again not sure but promises..
 
 app.use(bodyParser.urlencoded());//get post from url
 
-app.use(function(req,res,next){
+app.use(function(req,res,next){ //has something to do with allowing certain posts
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
@@ -20,37 +20,23 @@ app.use(function(req,res,next){
 
 //what to reply when rcv post
 app.post('/api/search', function(req,res){
-    var response = [{"test": "TEST"}];
+    var response;
     threatFeeds = searchHandler.searchers(); //get list of threatfeeds
     console.log(threatFeeds);   //list these threat feeds
-    //function bullshit(i){
-    //    var threatFeed = require(threatFeeds[i].plugin); //get the require from the plugin field
-    //    var info = threatFeed.data(req.body.md5);   //pass md5 to plug in
-    //        info.then( (data) => { // wait for data to come in
-    //            console.log(i);
-    //            threatFeeds[i].setData(JSON.stringify(data)); // set the raw data field in the class to the reply
-    //            console.log("data set");
-    //            source = {"Resource" : threatFeeds[i].source};
-    //            //console.log({Resource: threatFeeds[i].source });
-    //            response.push(source);//send the data, need to add graphing thing later
-    //            console.log("HERE!!!!!!!!!!");
-    //        });
-    //    return(info);
 
 
     //promises
-    var plist = [];
+    var plist = []; //initialize a list of promises (one for each theat feed)
 
     for (var i = 0; i<threatFeeds.length; i++){
-        plist.push(loader.loader(i, req));
+        plist.push(dataInterface.loader(i, req)); //Call the loader function
         }
 
-    console.log(plist);
-    Promise.all(plist).then((response) => {
+    console.log(plist); //write promises out to con
+    Promise.all(plist).then((response) => { //once all promises are fulfilled
         console.log(response);
-        res.send(response);
+        res.send(response); //send the response
     });
-    console.log(response);
 })
 
 //app.get('/api/search', searchHandler.search())
