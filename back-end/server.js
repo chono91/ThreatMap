@@ -1,13 +1,14 @@
 //This is the main server file that handles communication with the client
-
+//loo up modules
+//look up closure
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var dataInterface = require('./classes/dataInterface');
-var q = require('deferred'); //has something to do with promieses, not sure
+var deferred = require('deferred'); //has something to do with promieses, not sure
 var searchHandler = require('./controllers/searchHandler');
 
-var promise = q();//again not sure but promises..
+var promise = deferred();//again not sure but promises..
 
 app.use(bodyParser.urlencoded());//get post from url
 
@@ -33,7 +34,7 @@ app.post('/api/search', function(req,res){
         }
 
     console.log(plist); //write promises out to con
-    Promise.all(plist).then((response) => { //once all promises are fulfilled
+    deferred(plist).then((response) => { //once all promises are fulfilled
         console.log(response);
         res.send(response); //send the response
     });
