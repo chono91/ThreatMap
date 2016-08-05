@@ -10,13 +10,12 @@ module.exports = {
                 console.log(i);
                 threatFeeds[i].setData(JSON.stringify(data)); // set the raw data field in the class to the reply
                 console.log("data set");
-                //source = {"Resource" : threatFeeds[i].source};
+                var response = {"Resource" : threatFeeds[i].source};
                 //console.log({Resource: threatFeeds[i].source });
                 //send the data, need to add graphing thing later
                 console.log(threatFeeds[i].source + "HERE!!!!!!!!!!");
-                promise.resolve(JSON.stringify(source));
+                promise.resolve(response);
             });
-
         return promise.promise;
         //return(info);
     }

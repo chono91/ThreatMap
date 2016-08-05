@@ -33,9 +33,10 @@ app.post('/api/search', function(req,res){
         plist.push(dataInterface.loader(i, req)); //Call the loader function
         }
 
-    console.log(plist); //write promises out to con
-    deferred(plist).then((response) => { //once all promises are fulfilled
-        console.log(response);
+
+    console.log("IM PLIST", plist); //write promises out to con
+    deferred.map(plist)((response) => { //once all promises are fulfilled
+        console.log(response+"Final sending");
         res.send(response); //send the response
     });
 })
