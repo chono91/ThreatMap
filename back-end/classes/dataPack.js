@@ -7,11 +7,11 @@ function dataPack(name) {
     this.plugin = ""; //Location of the javascript file to interface with
 }
 dataPack.prototype.setData = function (Data) {
-    console.log("setting the data");
+    //console.log("setting the data");
     this.rawData = Data;
 };
 dataPack.prototype.setPlugin = function (Data) {
-    console.log("setting the plugin");
+    //console.log("setting the plugin");
     this.plugin = Data;
 };
 dataPack.getPlugin = function () {

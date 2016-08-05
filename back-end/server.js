@@ -23,7 +23,6 @@ app.use(function(req,res,next){ //has something to do with allowing certain post
 app.post('/api/search', function(req,res){
     var response;
     threatFeeds = searchHandler.searchers(); //get list of threatfeeds
-    console.log("THREATFEEDS",threatFeeds);   //list these threat feeds
 
 
     //promises
@@ -34,7 +33,6 @@ app.post('/api/search', function(req,res){
         }
 
 
-    console.log("IM PLIST", plist); //write promises out to con
     deferred.map(plist)((response) => { //once all promises are fulfilled
         console.log(response+"Final sending");
         res.send(response); //send the response

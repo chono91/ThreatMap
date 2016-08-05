@@ -38,14 +38,12 @@ module.exports = {
             var request = https.request(options, function (res2) {
                 res2.setEncoding('UTF-8');
                 var responseString = '';
-                console.log("Repsonse from server started");
                 res2.on('data', function (data) {
                     //console.log(`--chunk-- ${data}`);
-                    console.log("Recievned Data Chunk");
                     responseString += data;
                 });
                 res2.on('end', function () {
-                    console.log("End of data stream");
+                    console.log("GOT VT DATA");
                     var responseObject = JSON.parse(responseString);
                     promise.resolve(responseObject);
                     success(responseObject);

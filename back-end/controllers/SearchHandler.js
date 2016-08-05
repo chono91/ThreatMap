@@ -13,7 +13,6 @@ module.exports = {
                 var plugin = require(file); //gets the plug in function
                 var pluginPack = new dataPack(plugin.info());//sets up a new datapack for virus total with source name
                 pluginPack.setPlugin("./feeds/vt.js");
-                console.log("pluginpack plugin: ",pluginPack.plugin)
                 plugins.push(pluginPack);
             }
             return(plugins);
