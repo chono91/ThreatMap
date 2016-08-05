@@ -1,4 +1,8 @@
 module.exports = {
+    info: function () {
+        return("Virus Total");
+        },
+
     data: function (req) {
         var querystring = require('querystring');
         var https = require("https");
@@ -49,7 +53,7 @@ module.exports = {
                 });;
             });
             request.on("error", function (err) {
-                console.log(`problem with request: ${err.message}`);
+                console.log('problem with request: ${err.message}');
             });
             request.end();
         }

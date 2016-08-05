@@ -23,7 +23,7 @@ app.use(function(req,res,next){ //has something to do with allowing certain post
 app.post('/api/search', function(req,res){
     var response;
     threatFeeds = searchHandler.searchers(); //get list of threatfeeds
-    console.log(threatFeeds);   //list these threat feeds
+    console.log("THREATFEEDS",threatFeeds);   //list these threat feeds
 
 
     //promises
