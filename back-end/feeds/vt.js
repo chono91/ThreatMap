@@ -55,11 +55,10 @@ module.exports = {
             });
             request.end();
         }
+
         performRequest(endpoint, 'GET', {
             resource: resource
             , apikey: apikey
-        }, function (data) {
-            //console.log('Fetched');
         });
         console.log('returning promise.promise');
         return promise.promise;
