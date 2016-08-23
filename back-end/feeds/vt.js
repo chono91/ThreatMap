@@ -61,6 +61,7 @@ module.exports = {
         }, function (data) {
             //console.log('Fetched');
         });
+        console.log('returning promise.promise');
         return promise.promise;
     }
 }

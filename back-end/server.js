@@ -22,6 +22,7 @@ app.use(function(req,res,next){ //has something to do with allowing certain post
 //what to reply when rcv post
 app.post('/api/search', function(req,res){
     var response;
+    //var threatFeeds = []; //initialize threatfeeds
     threatFeeds = searchHandler.searchers(); //get list of threatfeeds
 
 
