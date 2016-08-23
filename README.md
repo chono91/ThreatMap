@@ -8,6 +8,9 @@ To use this template, choose one of the following options to get started:
 * Download the latest release on Start Bootstrap
 * Fork this repository on GitHub
 
+navigate to backend, node server.js
+navigate to frontend gulp serve
+
 ## Bugs and Issues
 
 Have a bug or an issue with this template? [Open a new issue](https://github.com/IronSummitMedia/startbootstrap-bare/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/bare/).
