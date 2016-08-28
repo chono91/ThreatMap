@@ -9,18 +9,18 @@ module.exports = {
         var fs = require("fs");
         var q = require("deferred");
         var host = "www.virustotal.com";
-        var endpoint = "/vtapi/v2/file/report";
+        var apiUrl = "/vtapi/v2/file/report";
         var port = 443;
         var resource = req;
         var apikey = "065d00685e274ea2261493fb28afb039adacb5211a54fea8098d09d726b8a4a3";
         var method = "GET";
         var promise = q();
 
-        function performRequest(endpoint, method, data, success) {
+        function performRequest(apiUrl, method, data, success) {
             var dataString = JSON.stringify(data);
             var headers = {};
             if (method == 'GET') {
-                endpoint += '?' + querystring.stringify(data);
+                apiUrl += '?' + querystring.stringify(data);
             }
             else {
                 headers = {
@@ -31,7 +31,7 @@ module.exports = {
             var options = {
                 host: host
                 , port: port
-                , path: endpoint
+                , path: apiUrl
                 , method: method
                 , headers: headers
             };
@@ -56,7 +56,7 @@ module.exports = {
             request.end();
         }
 
-        performRequest(endpoint, 'GET', {
+        performRequest(apiUrl, 'GET', {
             resource: resource
             , apikey: apikey
         });
