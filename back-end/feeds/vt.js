@@ -46,7 +46,7 @@ module.exports = {
                     console.log("GOT VT DATA");
                     var responseObject = JSON.parse(responseString);
                     promise.resolve(responseObject);
-                    success(responseObject);
+                    //success(responseObject);
                     return responseObject;
                 });;
             });

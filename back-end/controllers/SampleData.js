@@ -5,11 +5,11 @@ module.exports = {
 
     data: function (req) {
 
-        function performRequest(){
+        function performRequest(req){
+            console.log("Staring sample data");
             var sampledata = ["192.168.0.1", "192.168.0.2", "192.168.0.3"];
-            return sampledata;
+            //return sampledata;
             promise.resolve(sampledata);
-            success(sampledata);
             console.log("Sapmledata retruned");
             return sampledata;
         }
