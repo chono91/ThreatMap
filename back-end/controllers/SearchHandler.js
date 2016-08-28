@@ -1,4 +1,4 @@
-//This file is to make a list of datapacks that represent each datafeed being sourced from
+//This file is to make a list of datapacks that represent each datafeed being sourced from, returns to the server.js
 var dataPack = require('../classes/dataPack.js');
 var fs = require('fs');
 var q = require("deferred");

@@ -1,5 +1,5 @@
 //This is the main server file that handles communication with the client
-//loo up modules
+//look up modules
 //look up closure
 var express = require('express');
 var app = express();
