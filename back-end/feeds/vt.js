@@ -15,8 +15,12 @@ module.exports = {
         var apikey = "065d00685e274ea2261493fb28afb039adacb5211a54fea8098d09d726b8a4a3";
         var method = "GET";
         var promise = q();
+        var data = {
+            resource: resource
+            , apikey: apikey
+        };
 
-        function performRequest(apiUrl, method, data, success) {
+        //function performRequest(apiUrl, method, data, success) {
             var dataString = JSON.stringify(data);
             var headers = {};
             if (method == 'GET') {
@@ -54,12 +58,11 @@ module.exports = {
                 console.log('problem with request: ${err.message}');
             });
             request.end();
-        }
 
-        performRequest(apiUrl, 'GET', {
-            resource: resource
-            , apikey: apikey
-        });
+        //performRequest(apiUrl, 'GET', {
+        //    resource: resource
+        //    , apikey: apikey
+        //});
         console.log('returning promise.promise');
         return promise.promise;
     }
