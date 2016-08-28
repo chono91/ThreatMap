@@ -1,7 +1,7 @@
 module.exports = {
     info: function () {
-        return("Virus Total");
-        },
+        return ("Virus Total");
+    },
 
     data: function (req) {
         var querystring = require('querystring');
@@ -19,51 +19,50 @@ module.exports = {
             resource: resource
             , apikey: apikey
         };
+        var dataString = JSON.stringify(data);
+        var headers = {};
 
-        //function performRequest(apiUrl, method, data, success) {
-            var dataString = JSON.stringify(data);
-            var headers = {};
-            if (method == 'GET') {
-                apiUrl += '?' + querystring.stringify(data);
-            }
-            else {
-                headers = {
-                    'Content-Type': 'application/json'
-                    , 'Content-Length': dataString.length
-                };
-            }
-            var options = {
-                host: host
-                , port: port
-                , path: apiUrl
-                , method: method
-                , headers: headers
+
+        if (method == 'GET') {
+            apiUrl += '?' + querystring.stringify(data);
+        }
+        else {
+            headers = {
+                'Content-Type': 'application/json'
+                , 'Content-Length': dataString.length
             };
-            var request = https.request(options, function (res2) {
-                res2.setEncoding('UTF-8');
-                var responseString = '';
-                res2.on('data', function (data) {
-                    //console.log(`--chunk-- ${data}`);
-                    responseString += data;
-                });
-                res2.on('end', function () {
-                    console.log("GOT VT DATA");
-                    var responseObject = JSON.parse(responseString);
-                    promise.resolve(responseObject);
-                    //success(responseObject);
-                    return responseObject;
-                });;
-            });
-            request.on("error", function (err) {
-                console.log('problem with request: ${err.message}');
-            });
-            request.end();
+        }
+        var options = {
+            host: host
+            , port: port
+            , path: apiUrl
+            , method: method
+            , headers: headers
+        };
 
-        //performRequest(apiUrl, 'GET', {
-        //    resource: resource
-        //    , apikey: apikey
-        //});
-        console.log('returning promise.promise');
-        return promise.promise;
+        var request = https.request(options, function (res2) {
+            res2.setEncoding('UTF-8');
+            var responseString = '';
+            res2.on('data', function (data) { //while content == data, add to response string
+                //console.log(`--chunk-- ${data}`);
+                responseString += data; //add to response string
+            });
+
+            res2.on('end', function () { //when response == rnd
+                console.log("GOT VT DATA");
+                var responseObject = JSON.parse(responseString); //convert to string from json
+                promise.resolve(responseObject);//add promise resolve thing?
+                //success(responseObject);
+                return responseObject;//return data with promise into variable request
+            });;
+        });
+
+        request.on("error", function (err) { //if request == 'error'
+            console.log('problem with request: ${err.message}');
+        });
+
+        request.end();
+
+        return promise.promise; //I think this returns the promise with the request attached
     }
 }
