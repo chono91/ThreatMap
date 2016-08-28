@@ -5,15 +5,51 @@
             <div class="input-group">
                 <!--<textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message" name="md5"></textarea>
             <span class="input-group-addon btn btn-primary" ng-click="search.postMessage()" type="Submit">Post</span>-->
-                <form id="myform" action="http://localhost:5000/api/search" method="post" enctype="application/x-www-form-urlencoded">
-                    <input type="text" id="mytext" name="md5" />
-                    <input type="submit" id="mysubmit" /> </form>
-                </form>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+                <script src="https://d3js.org/d3.v4.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $("button").click(function () {
+                            var txt = $("input").val();
+                            $.post("http://localhost:5000/api/search", {
+                                txt
+                            }, function (data, status) {
+                                console.log("Data: " + JSON.stringify(data[0]) + "\nStatus: " + status);
+                                $("span").html(JSON.stringify(data[0]));
+                            });
+                        });
+                    });
+                </script>
+                <input type="text">
+                <button> Send an HTTP POST request to a page and get the result back</button>
             </div>
         </div>
+        <script>
+            d3.select("span").style("color", "black").style("background-color", "white");
+        </script>
         <div class="Panel panel-default" id="target">
             <div class="panel-heading" id="template">
-                <script id="template" type="text/x-tmpl-mustache"> {{messages}} </script>
+                <p>TEST: <span></span></p>
             </div>
-            <!--this is a template! look that shit up-->
         </div>
+
+        <style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+</style>
+<div class="chart">
+  <div style="width: 40px;">4</div>
+  <div style="width: 80px;">8</div>
+  <div style="width: 150px;">15</div>
+  <div style="width: 160px;">16</div>
+  <div style="width: 230px;">23</div>
+  <div style="width: 420px;">42</div>
+</div>
