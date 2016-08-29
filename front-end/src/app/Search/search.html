@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<script src="../../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../../bower_components/d3/d3.js"></script>
+
 <div class="container">
     <div class="Panel panel-default">
         <div class="panel-heading"> Post A Message</div>
@@ -5,23 +9,30 @@
             <div class="input-group">
                 <!--<textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message" name="md5"></textarea>
             <span class="input-group-addon btn btn-primary" ng-click="search.postMessage()" type="Submit">Post</span>-->
-                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-                <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+
                 <script>
                     $(document).ready(function () {
-                        $("button").click(function () {
+                        $("#button").click(function () {
                             var txt = $("input").val();
                             $.post("http://localhost:5000/api/search", {
                                 txt
                             }, function (data, status) {
-                                console.log("Data: " + JSON.stringify(data[0]) + "\nStatus: " + status);
+                                console.log("Data: " + JSON.stringify(data[1]) + "\nStatus: " + status);
                                 $("span").html(JSON.stringify(data[0]));
                             });
                         });
+                        $("#btn").click(function () {
+                            $("#TEST").text("25");
+                            $("#TEST").attr("style", "width: 150px;");
+                        });
                     });
                 </script>
+
+
                 <input type="text">
-                <button> Send an HTTP POST request to a page and get the result back</button>
+                <button id="button"> Send an HTTP POST request to a page and get the result back</button>
             </div>
         </div>
         <script>
@@ -30,9 +41,10 @@
         <div class="Panel panel-default" id="target">
             <div class="panel-heading" id="template">
                 <p>TEST: <span></span></p>
+                <p>TESTCHART: <chart></chart></p>
             </div>
         </div>
-
+        <meta charset="utf-8">
         <style>
 
 .chart div {
@@ -45,11 +57,54 @@
 }
 
 </style>
-<div class="chart">
-  <div style="width: 40px;">4</div>
-  <div style="width: 80px;">8</div>
-  <div style="width: 150px;">15</div>
-  <div style="width: 160px;">16</div>
-  <div style="width: 230px;">23</div>
-  <div style="width: 420px;">42</div>
-</div>
+<div class="chart"></div>
+<script>
+
+    function parent(n){
+    var o;
+    srcData.forEach(function(d){
+        if(d.id == n)
+            o = d;
+    });
+    return o;
+}
+
+var srcData =
+    [{"id":1, "name":"first", "parentid":0, "value":100, "color":"red", "posx":100, "posy":100},
+    {"id":2, "name":"second", "parentid":1, "value":80, "color":"green", "posx":100, "posy":200},
+    {"id":3, "name":"third", "parentid":2, "value":120, "color":"blue", "posx":150, "posy":300},
+    {"id":4, "name":"fourth", "parentid":2, "value":100, "color":"brown", "posx":50, "posy":300},
+    {"id":5, "name":"fifth", "parentid":3, "value":200, "color":"purple", "posx":250, "posy":400},
+     {"id":6, "name":"fifth", "parentid":5, "value":200, "color":"pink", "posx":150, "posy":500},
+     {"id":7, "name":"fifth", "parentid":5, "value":200, "color":"pink", "posx":250, "posy":500},
+     {"id":8, "name":"fifth", "parentid":5, "value":200, "color":"pink", "posx":350, "posy":500}
+    ];
+
+
+var svg = d3.select("body").append("svg").attr("height",800).attr("width",1000);
+
+var items = svg.selectAll("g").data(srcData).enter().append("g");
+    items.each(function(d, i){
+        d3.select(this).attr("transform","translate("+d.posx+","+d.posy+")");
+
+        if(d.parentid > 0)
+            d3.select(this).append("line")
+                .attr("x",0)
+                .attr("y",0)
+                .attr("x1",function(d){ return -1*(d.posx - parent(d.parentid).posx); })
+                .attr("y1",function(d){ return -1*(d.posy - parent(d.parentid).posy); })
+                .style("stroke",d.color)
+                .style("stroke-width",2);
+
+        d3.select(this).append("circle")
+            .attr("r",30)
+            .style("fill",d.color)
+
+        d3.select(this).append("text")
+            .attr("dx", 12)
+            .attr("dy", ".35em")
+            .text("TEST");
+
+    });
+
+</script>
