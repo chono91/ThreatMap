@@ -3,8 +3,9 @@ module.exports = dataPack;
 
 function dataPack(name) {
     this.name = name; //threat feed source eg. Virus Total
-    this.rawData = "garbasge"; //Storage place for returning data from the source
+    this.rawData = "GARBAGE"; //Storage place for returning data from the source
     this.plugin = ""; //Location of the javascript file to interface with
+
 }
 dataPack.prototype.setData = function (Data) {
     //console.log("setting the data");

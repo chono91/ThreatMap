@@ -19,7 +19,7 @@
                             $.post("http://localhost:5000/api/search", {
                                 txt
                             }, function (data, status) {
-                                console.log("Data: " + JSON.stringify(data[0].rawData[2]) + "\nStatus: " + status);
+                                console.log("Data: " + data[0].rawData[1] + "\nStatus: " + status);
                                 $("span").html(JSON.stringify(data[0]));
                             });
                         });
