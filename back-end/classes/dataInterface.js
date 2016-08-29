@@ -11,12 +11,8 @@ module.exports = {
                 threatFeeds[i].setData(data); // set the raw data field in the class to the reply
                 var response = ({"Resource" : threatFeeds[i].name})
                 response.rawData = threatFeeds[i].rawData;
-                console.log("RESP DATA: " + response.rawData[2]);
-                //console.log({Resource: threatFeeds[i].source });
-                //send the data, need to add graphing thing later
                 promise.resolve(response);
             });
         return promise.promise;
-        //return(info);
     }
 }
